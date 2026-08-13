@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auth</title>
+  </head>
+  <body>
+    <header><h1>Register</h1></header>
+    <main>
+      <div>
+        <form action="/register" method="POST">
+          <div>
+            <label for="username"> Username </label>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Input your username"
+              required
+            />
+          </div>
+          <br />
+          <div>
+            <label for="password"> Password </label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Input your password"
+              required
+            />
+          </div>
+          <br />
+          <div>
+            <label for="avatar"> Avatar </label>
+            <input
+              type="file"
+              name="avatar"
+              id="avatar"
+              placeholder="Upload your avatar"
+              required
+            />
+          </div>
+          <br />
+          <div>
+            <label for="hobbies"> Hobbies </label>
+            <input type="checkbox" name="hobbies" value="reading" /> Reading
+            <input type="checkbox" name="hobbies" value="sports" /> Sports
+            <input type="checkbox" name="hobbies" value="traveling" /> Traveling
+          </div>
+          <br />
+          <div>
+            <label for="gender"> Gender </label>
+            <input type="radio" name="gender" value="male" /> Male
+            <input type="radio" name="gender" value="female" /> Female
+            <input type="radio" name="gender" value="other" /> Other
+          </div>
+          <br />
+          <div>
+            <label for="department"> Department </label>
+            <select name="department" id="department">
+              <option value="it">IT</option>
+              <option value="hr">HR</option>
+              <option value="finance">Finance</option>
+            </select>
+          </div>
+          <br />
+          <div>
+            <textarea
+              name="bio"
+              id="bio"
+              placeholder="Write something fun about yourself"
+              rows="4"
+              cols="50"
+            ></textarea>
+          </div>
+          <br />
+          <div>
+            <button type="submit">Register</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

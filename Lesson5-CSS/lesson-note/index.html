@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to CSS - Web Design Foundations</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Doodle/casual header font (Gochi Hand) and clean body text (Nunito) -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <style>
+      /* 1. THE SETUP */
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: #f1f5f9;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 30px;
+        place-items: center;
+        margin: 0;
+        min-height: 100vh;
+        padding: 30px 0;
+      }
+
+      .slide-container {
+        align-items: center;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        display: flex;
+        flex-direction: column;
+        height: 720px;
+        justify-content: center;
+        overflow: hidden;
+        padding: 60px 80px;
+        position: relative;
+        width: 1280px;
+      }
+
+      .slide-container > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* BRANDING WATERMARK */
+      .brand-watermark {
+        position: absolute;
+        bottom: 30px;
+        right: 40px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "Nunito", sans-serif;
+        font-weight: 700;
+        font-size: 20px;
+        color: #1e293b;
+        z-index: 10;
+      }
+
+      .brand-watermark img {
+        height: 35px;
+        width: 35px;
+        object-fit: contain;
+      }
+
+      .brand-watermark span {
+        color: #ff7a00;
+      }
+
+      /* 2. CONSISTENT TYPOGRAPHY */
+      .slide-container h1,
+      .slide-container h2,
+      .slide-container h3,
+      .slide-container .number {
+        font-family: "Gochi Hand", cursive;
+        color: #1e293b;
+        margin: 0;
+      }
+
+      .slide-container p,
+      .slide-container li,
+      .slide-container th,
+      .slide-container td,
+      .slide-container .subtitle,
+      .slide-container .number-label {
+        font-family: "Nunito", sans-serif;
+        color: #334155;
+      }
+
+      /* Hand-drawn / Doodle Box effect */
+      .doodle-box {
+        border: 3px solid #1e293b;
+        border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        background-color: #ffffff;
+        box-shadow: 4px 4px 0px #ff7a00;
+      }
+
+      /* Consistent Font Sizes */
+      .slide-container h1 {
+        font-size: 90px;
+        line-height: 1.1;
+        color: #ff7a00;
+      }
+
+      .slide-container .slide-title {
+        font-size: 55px;
+        font-weight: 400;
+        margin-bottom: 30px;
+        text-align: left;
+        width: 100%;
+        color: #1e293b;
+        border-bottom: 3px dashed #ffd166;
+        padding-bottom: 10px;
+      }
+
+      .slide-container h3 {
+        font-size: 40px;
+        margin-bottom: 15px;
+        color: #ff7a00;
+      }
+
+      .slide-container p,
+      .slide-container li,
+      .slide-container .subtitle,
+      .slide-container th,
+      .slide-container td {
+        font-size: 24px;
+        line-height: 1.5;
+      }
+
+      .slide-container .subtitle {
+        font-size: 32px;
+        font-weight: 600;
+        margin: 20px auto;
+      }
+
+      /* 3. LAYOUT DEFINITIONS */
+      .content-area {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: center;
+        width: 100%;
+      }
+
+      /* Title Layout */
+      .title-layout {
+        text-align: center;
+        max-width: 900px;
+      }
+
+      /* Section Title Layout */
+      .section-title-layout {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+      }
+
+      .section-title-layout h2 {
+        font-size: 80px;
+        color: #ff7a00;
+        margin-bottom: 20px;
+      }
+
+      .section-title-layout p {
+        font-size: 32px;
+        font-weight: 600;
+        margin: 0 auto;
+        max-width: 800px;
+      }
+
+      .section-title-layout hr {
+        background-color: #1e293b;
+        border: none;
+        height: 4px;
+        margin: 30px auto;
+        width: 120px;
+        border-radius: 10px;
+      }
+
+      /* Two Column */
+      .two-column {
+        align-items: flex-start;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        width: 100%;
+      }
+
+      .two-column.tiled {
+        align-items: stretch;
+      }
+
+      .two-column.tiled > div {
+        padding: 40px;
+        text-align: left;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+      }
+
+      .two-column ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .two-column li {
+        margin-bottom: 16px;
+        padding-left: 35px;
+        position: relative;
+      }
+      .two-column li::before {
+        content: "\f0da";
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        color: #ff7a00;
+        position: absolute;
+        left: 0;
+        font-size: 24px;
+      }
+
+      .two-column strong {
+        color: #1e293b;
+      }
+
+      .code-block {
+        background-color: #f8fafc;
+        border: 2px dashed #cbd5e1;
+        padding: 12px;
+        border-radius: 8px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 20px !important;
+        color: #0f172a !important;
+        display: block;
+        margin-top: 10px;
+      }
+
+      /* Giant code text for syntax breakdown */
+      .giant-code {
+        font-family: "Courier New", Courier, monospace;
+        font-size: 45px;
+        font-weight: 700;
+        color: #1e293b;
+        text-align: center;
+        margin-bottom: 40px;
+      }
+      .syntax-pointer {
+        color: #ff7a00;
+        font-family: "Gochi Hand", cursive;
+        font-size: 30px;
+      }
+
+      /* Image Wrapping */
+      .image-wrapper {
+        height: 420px;
+        max-width: 100%;
+        overflow: hidden;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .image-wrapper img {
+        height: 100%;
+        max-width: 100%;
+        object-fit: contain;
+        width: 100%;
+      }
+      .image-wrapper i {
+        font-size: 200px;
+        color: #ffd166;
+        text-shadow: 8px 8px 0px #1e293b;
+      }
+
+      /* Tiled Content (3 cols) */
+      .tiled-content {
+        align-items: stretch;
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        width: 100%;
+      }
+
+      .tile {
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        justify-content: flex-start;
+        padding: 35px 25px;
+        text-align: center;
+      }
+
+      .tile .icon {
+        color: #1e293b;
+        font-size: 55px;
+        margin-bottom: 20px;
+      }
+
+      /* Bullet List */
+      .bullet-list {
+        max-width: 1000px;
+        width: 100%;
+      }
+
+      .bullet-list ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .bullet-list li {
+        gap: 15px;
+        padding-left: 45px;
+        position: relative;
+      }
+
+      .bullet-list i {
+        color: #ff7a00;
+        font-size: 28px;
+        left: 0;
+        position: absolute;
+        top: 2px;
+      }
+
+      .styled-code {
+        background-color: #f8fafc;
+        border: 2px dashed #cbd5e1;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 20px;
+        color: #0369a1;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Slide 1: Title_Slide -->
+    <div class="slide-container" id="slide1">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <div class="title-layout">
+        <h1 style="font-size: 110px; margin-bottom: 20px">
+          Introduction to CSS
+        </h1>
+        <p
+          class="subtitle doodle-box"
+          style="display: inline-block; padding: 15px 40px; color: #1e293b"
+        >
+          Web Design Foundations • Lesson 5
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 2: Section_Title (Learning Objectives) -->
+    <div class="slide-container" id="slide2">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <div class="section-title-layout">
+        <h2>Learning Objectives</h2>
+        <hr />
+        <p>
+          By the end of this lesson, you will learn how to transform plain HTML
+          into beautifully styled, colorful webpages.
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 3: Two_Column_Tiled_Text (HTML vs CSS Analogy) -->
+    <div class="slide-container" id="slide3">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <h2 class="slide-title">HTML vs. CSS: The House Analogy</h2>
+      <div class="content-area">
+        <div class="two-column tiled">
+          <div class="doodle-box">
+            <h3 style="text-align: center">
+              <i class="fa-solid fa-trowel-bricks" style="color: #1e293b"></i>
+              HTML = Structure
+            </h3>
+            <p>
+              HTML gives a webpage its structure. It tells the browser:
+              <em
+                >"This is a heading, this is a paragraph, this is an image."</em
+              >
+            </p>
+            <p>
+              <strong>Think about a house:</strong> HTML represents the walls,
+              the doors, and the layout of the rooms.
+            </p>
+          </div>
+          <div class="doodle-box" style="background-color: #fffaf0">
+            <h3 style="text-align: center">
+              <i class="fa-solid fa-paint-roller" style="color: #ff7a00"></i>
+              CSS = Presentation
+            </h3>
+            <p>
+              CSS controls how that structure looks. It tells the browser:
+              <em>"Make this heading blue and large."</em>
+            </p>
+            <p>
+              <strong>Think about a house:</strong> CSS represents the paint on
+              the walls, the furniture, and the beautiful decorations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Image_Right_Text_Left (What is CSS) -->
+    <div class="slide-container" id="slide4">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <h2 class="slide-title">What is CSS?</h2>
+      <div class="content-area">
+        <div class="two-column" style="align-items: center">
+          <div>
+            <ul>
+              <li>
+                <strong>CSS</strong> stands for
+                <strong>Cascading Style Sheets</strong>.
+              </li>
+              <li>
+                It is the technology used to control the visual presentation of
+                webpages.
+              </li>
+              <li>
+                With CSS, we can easily control:
+                <ul style="margin-top: 10px">
+                  <li>Text Colors & Backgrounds</li>
+                  <li>Fonts & Text Sizes</li>
+                  <li>Spacing & Layout</li>
+                  <li>Borders & Shadows</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="image-wrapper doodle-box">
+              <i class="fa-solid fa-palette"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Syntax Breakdown -->
+    <div class="slide-container" id="slide5">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <h2 class="slide-title">Basic CSS Syntax</h2>
+      <div class="content-area">
+        <p style="margin-bottom: 40px">
+          Every piece of CSS you write follows this exact same pattern:
+        </p>
+
+        <div
+          class="doodle-box"
+          style="
+            padding: 40px 80px;
+            width: 100%;
+            max-width: 900px;
+            text-align: center;
+            position: relative;
+          "
+        >
+          <div class="giant-code">
+            <span style="color: #ef4444">h1</span> {
+            <span style="color: #3b82f6">color</span>:
+            <span style="color: #10b981">blue</span>; }
+          </div>
+
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              margin-top: 30px;
+            "
+          >
+            <div style="text-align: center">
+              <i
+                class="fa-solid fa-arrow-up"
+                style="font-size: 30px; color: #ef4444"
+              ></i
+              ><br />
+              <span class="syntax-pointer">Selector</span><br />
+              <span style="font-size: 18px">(What to style)</span>
+            </div>
+            <div style="text-align: center">
+              <i
+                class="fa-solid fa-arrow-up"
+                style="font-size: 30px; color: #3b82f6"
+              ></i
+              ><br />
+              <span class="syntax-pointer">Property</span><br />
+              <span style="font-size: 18px">(What to change)</span>
+            </div>
+            <div style="text-align: center">
+              <i
+                class="fa-solid fa-arrow-up"
+                style="font-size: 30px; color: #10b981"
+              ></i
+              ><br />
+              <span class="syntax-pointer">Value</span><br />
+              <span style="font-size: 18px">(The new style)</span>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 30px; font-weight: 700; color: #ff7a00">
+          Don't forget the semicolon (;) at the end of every declaration!
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 6: Tiled_Text_With_Icons (3 Ways to Add CSS) -->
+    <div class="slide-container" id="slide6">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <h2 class="slide-title">Ways of Adding CSS</h2>
+      <div class="content-area">
+        <div class="tiled-content">
+          <div class="tile doodle-box">
+            <div class="icon"><i class="fa-solid fa-code"></i></div>
+            <h3 style="font-size: 30px">1. Inline CSS</h3>
+            <p>
+              Written directly inside an HTML element using the
+              <code>style</code> attribute.
+            </p>
+            <span
+              class="code-block"
+              style="font-size: 16px !important; text-align: left; width: 100%"
+              >&lt;h1 style="color: blue;"&gt;<br />Welcome<br />&lt;/h1&gt;</span
+            >
+            <p style="font-size: 18px; margin-top: 10px; color: #ef4444">
+              ❌ Hard to maintain.
+            </p>
+          </div>
+          <div class="tile doodle-box">
+            <div class="icon"><i class="fa-solid fa-file-code"></i></div>
+            <h3 style="font-size: 30px">2. Internal CSS</h3>
+            <p>
+              Written inside a <code>&lt;style&gt;</code> element in the HTML
+              <code>&lt;head&gt;</code>.
+            </p>
+            <span
+              class="code-block"
+              style="font-size: 16px !important; text-align: left; width: 100%"
+              >&lt;style&gt;<br />&nbsp;&nbsp;h1 { color: blue; }<br />&lt;/style&gt;</span
+            >
+            <p style="font-size: 18px; margin-top: 10px; color: #ff7a00">
+              ⚠️ Good for small tests.
+            </p>
+          </div>
+          <div
+            class="tile doodle-box"
+            style="background-color: #fffaf0; border-color: #ff7a00"
+          >
+            <div class="icon"><i class="fa-solid fa-link"></i></div>
+            <h3 style="font-size: 30px">3. External CSS</h3>
+            <p>
+              A completely separate <code>.css</code> file connected via the
+              <code>&lt;link&gt;</code> tag.
+            </p>
+            <span
+              class="code-block"
+              style="font-size: 16px !important; text-align: left; width: 100%"
+              >&lt;link rel="stylesheet" href="style.css"&gt;</span
+            >
+            <p
+              style="
+                font-size: 18px;
+                margin-top: 10px;
+                color: #10b981;
+                font-weight: 700;
+              "
+            >
+              ✅ Professional Standard!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 7: Tiled_Text_With_Icons (CSS Selectors) -->
+    <div class="slide-container" id="slide7">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <h2 class="slide-title">CSS Selectors (How to target elements)</h2>
+      <div class="content-area">
+        <div class="tiled-content">
+          <div class="tile doodle-box">
+            <h3 style="font-size: 30px">Element Selector</h3>
+            <p>Targets EVERY element of that type on the page.</p>
+            <span
+              class="code-block"
+              style="font-size: 16px !important; text-align: left; width: 100%"
+              ><strong>p</strong> {<br />&nbsp;&nbsp;color: green;<br />}</span
+            >
+          </div>
+          <div class="tile doodle-box">
+            <h3 style="font-size: 30px">Class Selector (.)</h3>
+            <p>
+              Targets elements with a specific class. <strong>Reusable!</strong>
+            </p>
+            <span
+              class="code-block"
+              style="font-size: 16px !important; text-align: left; width: 100%"
+              ><strong>.highlight</strong> {<br />&nbsp;&nbsp;color: red;<br />}</span
+            >
+          </div>
+          <div class="tile doodle-box">
+            <h3 style="font-size: 30px">ID Selector (#)</h3>
+            <p>
+              Targets a <strong>single, unique</strong> element on the page.
+            </p>
+            <span
+              class="code-block"
+              style="font-size: 16px !important; text-align: left; width: 100%"
+              ><strong>#title</strong> {<br />&nbsp;&nbsp;color: purple;<br />}</span
+            >
+          </div>
+        </div>
+        <p style="margin-top: 20px; font-weight: 600">
+          <em
+            >Pro Tip: You can group selectors with commas! e.g.,
+            <code>h1, h2, p { color: blue; }</code></em
+          >
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 8: Two_Column_Tiled_Text (Colors) -->
+    <div class="slide-container" id="slide8">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <h2 class="slide-title">Colors in CSS</h2>
+      <div class="content-area">
+        <div class="two-column tiled">
+          <div class="doodle-box">
+            <h3>Text vs Background</h3>
+            <p>
+              <code>color</code> changes text.
+              <code>background-color</code> changes the element's box.
+            </p>
+            <span class="code-block" style="font-size: 18px !important">
+              p {<br />
+              &nbsp;&nbsp;color: white;<br />
+              &nbsp;&nbsp;background-color: black;<br />
+              }
+            </span>
+          </div>
+          <div class="doodle-box">
+            <h3>Color Formats</h3>
+            <p>
+              <strong>Named:</strong> <code>red</code>, <code>blue</code>,
+              <code>white</code><br />
+              <strong>HEX:</strong> <code>#2563eb</code> (Red/Green/Blue hex
+              mix)<br />
+              <strong>RGB:</strong> <code>rgb(37, 99, 235)</code><br />
+              <strong>RGBA:</strong> <code>rgba(0, 0, 0, 0.5)</code> (Adds
+              transparency/opacity at the end!)
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 9: Styled_Bullet_Points (Backgrounds) -->
+    <div class="slide-container" id="slide9">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <h2 class="slide-title">Styling Backgrounds</h2>
+      <div class="content-area">
+        <div class="bullet-list">
+          <ul>
+            <li>
+              <i class="fa-solid fa-image"></i>
+              <strong>Background Image:</strong> <br />
+              <span class="styled-code"
+                >background-image: url("images/bg.jpg");</span
+              ><br />
+              <em
+                >(Remember: The file path is relative to where your CSS file is
+                saved!)</em
+              >
+            </li>
+            <li>
+              <i class="fa-solid fa-clone"></i>
+              <strong>Background Repeat:</strong> <br />
+              <span class="styled-code">background-repeat: no-repeat;</span
+              ><br />
+              Stops the image from tiling over and over.
+            </li>
+            <li>
+              <i class="fa-solid fa-arrows-to-circle"></i>
+              <strong>Background Position:</strong> <br />
+              <span class="styled-code">background-position: center;</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-expand"></i>
+              <strong>Background Size:</strong> <br />
+              <span class="styled-code">background-size: cover;</span><br />
+              Forces the image to cover the entire space while keeping its
+              proportions.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 10: Two_Column (Comments & Dev Tools) -->
+    <div class="slide-container" id="slide10">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <h2 class="slide-title">Comments & Browser Dev Tools</h2>
+      <div class="content-area">
+        <div class="two-column">
+          <div>
+            <h3>CSS Comments</h3>
+            <p>
+              Comments allow developers to leave notes inside their code. They
+              are completely ignored by the browser.
+            </p>
+            <p>
+              Use them to explain sections, leave reminders, or temporarily
+              disable a line of CSS.
+            </p>
+            <span class="code-block" style="font-size: 16px !important">
+              /* --- Navigation Styles --- */<br />
+              nav {<br />
+              &nbsp;&nbsp;background-color: black;<br />
+              }
+            </span>
+          </div>
+          <div>
+            <h3><i class="fa-solid fa-wrench"></i> Developer Tools</h3>
+            <p>
+              Professional developers don't just guess; they inspect!
+              <strong>Right-Click -> Inspect (or F12)</strong>
+            </p>
+            <ul style="margin-top: 10px">
+              <li><strong>Elements Panel:</strong> See the HTML structure.</li>
+              <li><strong>Styles Panel:</strong> See active CSS rules.</li>
+            </ul>
+            <div
+              style="
+                background-color: #fffaf0;
+                padding: 15px;
+                border-radius: 8px;
+                border: 2px dashed #ffd166;
+                margin-top: 15px;
+              "
+            >
+              <strong>Try it:</strong> You can edit colors or sizes right in the
+              browser!
+              <em>(Note: Changes are temporary and disappear on refresh).</em>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 11: Tiled_Text_With_Icons (Common mistakes) -->
+    <div class="slide-container" id="slide11">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <h2 class="slide-title">Common CSS Mistakes</h2>
+      <div class="content-area">
+        <div class="tiled-content">
+          <div class="tile doodle-box">
+            <div class="icon"><i class="fa-solid fa-link-slash"></i></div>
+            <h3 style="font-size: 30px">Missing The Link</h3>
+            <p>
+              If you don't add the <code>&lt;link rel="stylesheet"&gt;</code> to
+              your HTML head, or if the file path is wrong, your CSS simply
+              won't load.
+            </p>
+          </div>
+          <div class="tile doodle-box">
+            <div class="icon">
+              <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <h3 style="font-size: 30px">Forgetting Symbols</h3>
+            <p>
+              Forgetting the <strong>dot (.)</strong> before a class name, or
+              the <strong>hash (#)</strong> before an ID name in your CSS file.
+            </p>
+          </div>
+          <div class="tile doodle-box">
+            <div class="icon"><i class="fa-solid fa-eraser"></i></div>
+            <h3 style="font-size: 30px">Missing Semicolons</h3>
+            <p>
+              If you forget the semicolon <code>;</code> at the end of a line,
+              the browser gets confused and the next rule might break.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 12: Section_Title (Practical Exercise) -->
+    <div class="slide-container" id="slide12">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <div class="section-title-layout">
+        <h2 style="font-size: 80px; color: #1e293b">Let's Get Practical!</h2>
+        <hr style="background-color: #ff7a00" />
+        <p
+          style="
+            font-size: 28px;
+            line-height: 1.6;
+            max-width: 950px;
+            text-align: left;
+            font-weight: 500;
+          "
+        >
+          <strong>Step 1:</strong> Create a new file called
+          <code>style.css</code>.<br />
+          <strong>Step 2:</strong> Connect it to your
+          <code>index.html</code>.<br />
+          <strong>Step 3:</strong> Style the page!<br /><br />
+          ✅ Change the page background color.<br />
+          ✅ Change heading & paragraph colors.<br />
+          ✅ Create a reusable <code>.highlight</code> class and use it.<br />
+          ✅ Use an ID selector at least once.<br />
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 13: Section_Title (Homework) -->
+    <div class="slide-container" id="slide13">
+      <div class="brand-watermark">
+        <img
+          src="http://googleusercontent.com/image_collection/image_retrieval/6015169812288438722"
+          alt="AlcanceNG Logo"
+        />
+        Grow with <span>AlcanceNG</span>
+      </div>
+
+      <div class="section-title-layout">
+        <h2 style="font-size: 90px; color: #1e293b">Homework Task</h2>
+        <hr style="background-color: #ff7a00" />
+        <p
+          style="
+            font-size: 32px;
+            line-height: 1.6;
+            max-width: 950px;
+            text-align: center;
+            font-weight: 700;
+          "
+        >
+          🎨 Style Your Personal Portfolio!
+        </p>
+        <p
+          style="
+            font-size: 24px;
+            line-height: 1.6;
+            max-width: 850px;
+            text-align: center;
+            font-weight: 500;
+          "
+        >
+          Take the Personal Portfolio Page you built in Lesson 3 and attach an
+          external stylesheet to it. Apply a background color, style your
+          headings and navigation, use at least 3 different colors, and add a
+          background image to one of your sections.<br /><br />
+          <span style="color: #ff7a00; font-weight: 700"
+            >Bonus: Use Browser Developer Tools to test 5 different styles
+            before writing them in your code!</span
+          >
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

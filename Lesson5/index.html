@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        margin: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        padding: auto;
+      }
+      h1 {
+        color: #a78f2f;
+        text-align: center;
+        margin-top: 50px;
+      }
+      .container {
+        display: flex;
+        justify-content: center;
+        gap: 5rem;
+        align-items: center;
+        margin-top: 50px;
+        padding: 0 20px;
+        max-height: fit-content;
+      }
+      .hero-left {
+        max-width: 400px;
+      }
+      .hero-title {
+        font-size: 2rem;
+        color: #a78f2f;
+        margin-bottom: 20px;
+      }
+      #hero-title {
+        color: #a78f2f;
+      }
+      .hero-description {
+        font-size: 1rem;
+        color: #334155;
+      }
+      .hero-right {
+        max-width: 400px;
+      }
+      .hero-image {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="hero-left">
+        <h2 class="hero-title" id="hero-title">Welcome to my website!</h2>
+        <p class="hero-description">
+          This is a simple description of the website.
+        </p>
+      </div>
+      <div class="hero-right">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG8hbJ9g9UjaBx7b00Wn1xxusOh_IW7IHrp9tKbrAPxA2tCsaii8yFPotn&s=10"
+          alt="Placeholder Image"
+          class="hero-image"
+        />
+      </div>
+    </div>
+  </body>
+</html>
