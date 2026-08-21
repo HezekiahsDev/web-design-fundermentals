@@ -1,0 +1,53 @@
+/* #root {
+  font-family: "Poppins", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+} */
+/* We use a element selector to select the entire body element in order to apply font globally accross the page */
+body {
+  font-family: "Poppins", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+h1 {
+  font-size: 32px;
+  line-height: 1.2;
+  color: pink;
+}
+
+p,
+h2,
+h3,
+h4 {
+  font-size: 16px;
+  line-height: 1.5;
+  color: blue;
+}
+p {
+  text-align: justify;
+  letter-spacing: normal;
+}
+
+/* We use a class selector to target specific elements and apply unique styling */
+.logo {
+  font-size: 24px;
+}
+
+.description {
+  font-size: 10px;
+  color: red;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 700;
+  font-size: 24px;
+  text-decoration: overline;
+}
+a:hover {
+  text-decoration: line-through;
+  color: blue;
+}
